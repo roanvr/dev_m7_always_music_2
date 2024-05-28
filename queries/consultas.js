@@ -22,7 +22,7 @@ const agregarEstudiante = async(genero, fdn, telefono, email, pais, nombre) => {
     }
 };
 
-agregarEstudiante(genero, fdn, telefono, email, pais, nombre);
+/* agregarEstudiante(genero, fdn, telefono, email, pais, nombre); */
 
 
 const mostrarEstudiantes = async () => {
@@ -37,7 +37,7 @@ const mostrarEstudiantes = async () => {
     };
 }
 
-mostrarEstudiantes();
+/* mostrarEstudiantes(); */
 
 const mostrarXtelefono = async (telefono) => {
     try {
@@ -53,7 +53,7 @@ const mostrarXtelefono = async (telefono) => {
     }
 };
 
-mostrarXtelefono(telefono);
+/* mostrarXtelefono(telefono); */
 
 const actEstudiantes = async (genero, fdn, telefono, email, pais, nombre) => {
     try {
@@ -68,6 +68,19 @@ const actEstudiantes = async (genero, fdn, telefono, email, pais, nombre) => {
     }
 }
 
+const eliEstudiante = async (genero, fdn, telefono, email, pais, nombre) => {
+    try {
+        const consulta = {
+            text: 'DELETE FROM estudiantes WHERE nombre = $1',
+            values: [nombre],
+        };
+        const response = await pool.query(consulta);
+        console.log('El registro ha sido eliminando', response.rows[1]);
+    } catch (error) {
+        console.log(error.code, error.message);
+    };
+};
+
 if (opcion === 'agregar'){
     agregarEstudiante();
 }
@@ -80,4 +93,7 @@ if (opcion === 'mostrarTelefono'){
 }
 if (opcion === 'actualizar') {
     actEstudiantes(genero, fdn, telefono, email, pais, nombre);
+}
+if (opcion === 'eliminar') {
+    eliEstudiante(nombre);
 }
