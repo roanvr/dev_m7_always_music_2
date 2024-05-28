@@ -52,3 +52,16 @@ const mostrarXtelefono = async (telefono) => {
         console.log(error.code, error.message);
     }
 };
+
+mostrarXtelefono(telefono);
+
+if (opcion === 'agregar'){
+    agregarEstudiante();
+}
+if (opcion === 'mostrar'){
+    mostrarEstudiantes();
+}
+if (opcion === 'mostrarTelefono'){
+    const telefono = argumento[1];
+    mostrarXtelefono(telefono);
+}
