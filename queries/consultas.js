@@ -55,6 +55,19 @@ const mostrarXtelefono = async (telefono) => {
 
 mostrarXtelefono(telefono);
 
+const actEstudiantes = async (genero, fdn, telefono, email, pais, nombre) => {
+    try {
+        const consulta = {
+            text: 'UPDATE estudiantes SET genero = $1, fdn = $2, telefono = $3, email = $4, pais = $5 WHERE nombre = $6',
+            values: [genero, fdn, telefono, email, pais, nombre],
+        };
+        const response = await pool.query(consulta);
+        console.log('La base de datos ha sido actualizada', response.rowCount);
+    } catch (error) {
+        console.log(error.code, error.message)
+    }
+}
+
 if (opcion === 'agregar'){
     agregarEstudiante();
 }
@@ -64,4 +77,7 @@ if (opcion === 'mostrar'){
 if (opcion === 'mostrarTelefono'){
     const telefono = argumento[1];
     mostrarXtelefono(telefono);
+}
+if (opcion === 'actualizar') {
+    actEstudiantes(genero, fdn, telefono, email, pais, nombre);
 }
