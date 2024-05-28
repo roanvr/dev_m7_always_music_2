@@ -38,3 +38,17 @@ const mostrarEstudiantes = async () => {
 }
 
 mostrarEstudiantes();
+
+const mostrarXtelefono = async (telefono) => {
+    try {
+        const consulta = {
+            text: 'SELECT * FROM estudiantes WHERE telefono = $1',
+            values: [telefono],
+        };
+        const response = await pool.query(consulta);
+        console.log('El estudiante es:', response.rows[0]);
+
+    } catch (error) {
+        console.log(error.code, error.message);
+    }
+};
